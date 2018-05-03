@@ -189,6 +189,8 @@ def main():
     print('Education History:')
     for i in historyEdu:
         print('     ',i)
+    if len(historyEdu) == 0:
+        print('     None Listed')
     go = int(input('Continue? (1/0)'))
     if go == 1:
         main()
@@ -209,6 +211,7 @@ Current Location:
 Employment History:
       [" Физприборы, Бишкек (Пишпек, Фрунзе), Кыргызстан'>завод  Физприборы", '1981 - 1988,  техник']
 Education History:
+      None Listed
 Continue? (1/0)1
 enter link. 
 https://ok.ru/profile/162515345966
