@@ -6,9 +6,8 @@
  
  Provides name, age, current location, education history, and work history
  
- ## GUI and okScrape2
+ ### GUI and okScrape2
  
  okScrape2 for use with okGui
  
- provides more simplified/clear input and output displays
- 
+ basic GUI using tkinter
