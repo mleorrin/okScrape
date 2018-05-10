@@ -18,16 +18,19 @@ def clear():
     e = entry.get()
     l = len(e)
     entry.delete(0,l)
+    lang.set(0)
 
     
 def trans(words):
     translator = Translator()
     translated = translator.translate(words)
     return translated.text
+
 def setWidget():
     lwid.grid(row=0,column=0,padx=5,pady=5)
     entry.grid(row=0,column=1,columnspan=2,padx=5,pady=5)
     rbut.grid(row=0,column=4,padx=5,pady=5)
+    window.bind('<Return>',lambda n = 0:showData(entry.get()))
     cbut.grid(row=0,column=5,padx=5,pady=5)
     cb.grid(row=0,column=3,padx=5,pady=5)
     hbut.grid(row=1,column=5,padx=5,pady=5)
@@ -41,19 +44,22 @@ def setWidget():
     edBox.grid(row=4,column=0,columnspan=5,sticky=W,padx=5,pady=5)
     jobFrame.grid(row=5,column=0,columnspan=5,sticky=W,padx=5,pady=5)
     jobBox.grid(row=5,column=0,columnspan=5,sticky=W,padx=5,pady=5)
-
-
+\
 def showData(link):
     data = okScrape2.main(link)
     age = data[1]
     ed = data[3]
-    job = data[4]
     if lang.get():
         name = trans(data[0])
         loc = trans(data[2])
+        for i in range(len(data[4])):
+            data[4][i][-1] = trans(data[4][i][-1])
+        job = data[4]
     elif not lang.get():
         name = data[0]
         loc = data[2]
+        job = data[4]
+
     count = 1
     nBox.insert(count,name)
     aBox.insert(count,age)
@@ -64,11 +70,11 @@ def showData(link):
     jobBox.config(height=len(job))
     for i in range(len(ed)):
         count += 1
-        edBox.insert(count,ed[i])
+        edBox.insert(tkinter.END,ed[i][:-1])
     count = 1
     for i in range(len(job)):
         count += 1
-        jobBox.insert(count,job[i])    
+        jobBox.insert(tkinter.END,job[i])
 
 E = 'E'
 W = 'W'
@@ -82,6 +88,7 @@ entry = tkinter.Entry(window,width=50)
 rbut = tkinter.Button(window,text='Run',
                       width=20,height=1,
                       command=lambda n = 0:showData(entry.get()))
+
 cbut = tkinter.Button(window,text='Clear',
                       width=10,height=1,
                       command=clear)
