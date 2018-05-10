@@ -11,3 +11,7 @@
  okScrape2 for use with okGui
  
  basic GUI using tkinter
+
+
+###### Contact
+contact mleorrin@gmail.com with questions, comments, concerns, etc. 
